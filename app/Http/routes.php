@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::auth();
+
+Route::get('/register','PagesController@home');
+Route::get('/register/manufacturer','PagesController@registerManufacturer');
+Route::post('/register/manufacturer','FormController@registerManufacturer');
+
+Route::get('/home', 'HomeController@index');
