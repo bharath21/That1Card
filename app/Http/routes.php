@@ -17,8 +17,10 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/register','PagesController@home');
+Route::get('/dashboard','PagesController@home');
 Route::get('/register/manufacturer','PagesController@registerManufacturer');
 Route::post('/register/manufacturer','FormController@registerManufacturer');
-
+Route::get('/edit/manufacturer','PagesController@editManufacturer');
+Route::post('/find/manufacturer','FormController@findManufacturer');
+Route::post('/edit/manufacturer','FormController@editManufacturer');
 Route::get('/home', 'HomeController@index');

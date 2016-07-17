@@ -15,4 +15,8 @@ class PagesController extends Controller
     public function registerManufacturer(){
     	return view('forms.manufacturer_register');
     }
+
+    public function editManufacturer(){
+    	return view('forms.manufacturer_edit');
+    }
 }
