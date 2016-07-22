@@ -14,6 +14,13 @@ class CreateRetailersTable extends Migration
     {
         Schema::create('retailers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('retailer_code');
+            $table->string('retailer_name');
+            $table->string('retailer_TINno');
+            $table->string('retailer_CSTno');
+            $table->string('retailer_email');
+            $table->string('retailer_phone');
+            $table->string('retailer_address');
             $table->timestamps();
         });
     }

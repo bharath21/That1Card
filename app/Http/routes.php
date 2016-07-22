@@ -23,4 +23,14 @@ Route::post('/register/manufacturer','FormController@registerManufacturer');
 Route::get('/edit/manufacturer','PagesController@editManufacturer');
 Route::post('/find/manufacturer','FormController@findManufacturer');
 Route::post('/edit/manufacturer','FormController@editManufacturer');
+
+Route::get('/register/retailer','PagesController@registerRetailer');
+Route::post('/register/retailer','FormController@registerRetailer');
+Route::get('/edit/retailer','PagesController@editRetailer');
+Route::post('/find/retailer','FormController@findRetailer');
+Route::post('/edit/retailer','FormController@editRetailer');
+
+Route::get('/register/procurement','PagesController@registerProcurement');
+Route::post('/register/procurement','FormController@registerProcurement');
+
 Route::get('/home', 'HomeController@index');

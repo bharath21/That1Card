@@ -36,9 +36,14 @@
  	<div class="column">
 		 <blockquote>
 		 	<a href='{{action("PagesController@registerManufacturer")}}'>
-		 		<button>A Manufacturer</button>
+		 		<button>Manufacturer</button>
 		 	</a>
-
+		 	<a href='{{action("PagesController@registerRetailer")}}'>
+		 		<button>Retailer</button>
+		 	</a>
+		 	<a href='{{action("PagesController@registerProcurement")}}'>
+		 		<button>Procurement</button>
+		 	</a>
 		 </blockquote>
 
  	</div>
@@ -56,11 +61,14 @@
 	
   	<div class="row">
  	<br/>
- 	<div class="column column-40"></div>
+ 	<div class="column column-25"></div>
  	<div class="column">
 	 	<blockquote>
 		 	<a href='{{action("PagesController@editManufacturer")}}'>
 		 		<button>Manufacturer</button>
+		 	</a>
+		 	<a href='{{action("PagesController@editRetailer")}}'>
+		 		<button>Retailer</button>
 		 	</a>
 	 	</blockquote>
 	 </div>

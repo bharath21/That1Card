@@ -19,4 +19,16 @@ class PagesController extends Controller
     public function editManufacturer(){
     	return view('forms.manufacturer_edit');
     }
+    
+    public function registerRetailer(){
+    	return view('forms.retailer_register');
+    }
+
+    public function editRetailer(){
+    	return view('forms.retailer_edit');
+    }
+
+    public function registerProcurement(){
+        return view('forms.procurement_register');
+    }
 }
