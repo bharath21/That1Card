@@ -21,13 +21,17 @@
 </head>
 <body>
 <br/>
-<div class="row">
+<div class="row"> 
 	<div class="column column-offset-25">
-		<h1>
-			Register a procurement
-		</h1>
+		<form id="codeform">
+			<input type="text" id="TheCode">
+		</form>
+	</div>
+	<div class="column">
+		<button id="codebutton">Find this SKU code</button>
 	</div>
 </div>
+<hr/>
 <div class="row">
 	<div class="column column-50 column-offset-25">
 		<form id="procurement_form"  method="POST" enctype='multipart/form-data'>
@@ -68,6 +72,29 @@
   			headers: {
     		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   			}
+		});
+
+		$('#codebutton').click(function(){
+			code = $('#TheCode').val();
+			alert(code);
+			$.ajax({
+		        url: "{{action('FormController@findProcurement')}}",
+		        type:"POST",
+		        data: {"SKU_code" : code},
+		        success:function(data){
+		          	$('#procurement_date').val(data['date_of_purchase']);
+		          	$('#manufacturer_code').val(data['manufacturer_code']);
+		          	$('#SKU_code').val(data['SKU_code']);
+		          	$('#quantity').val(data['quantity']);
+		          	$('#price').val(data['overall_price']);
+		          	$('#supplier_card_code').val(data['supplier_card_code']);
+		          	$('#supplier_card_name').val(data['supplier_card_name']);
+		        },
+		        error:function(){ 
+		            alert("error!");
+		        }
+	    	});
+	
 		});
 
 		$('procurement_form').submit(function(e){

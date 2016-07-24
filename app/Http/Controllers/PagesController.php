@@ -31,4 +31,8 @@ class PagesController extends Controller
     public function registerProcurement(){
         return view('forms.procurement_register');
     }
+
+    public function editProcurement(){
+        return view('forms.procurement_edit');
+    }
 }

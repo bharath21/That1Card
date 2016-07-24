@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use File;
+use Storage;
 use Illuminate\Http\Request;
 use App\Manufacturer;
 use App\Retailer;
+use App\Procurement;
 use App\Http\Requests;
 
 class FormController extends Controller
@@ -36,19 +39,22 @@ class FormController extends Controller
     }
 
     public function registerProcurement(Request $request){
-        $file = $request->file('photo');
+        $file = $request->file('supplier_card_image');
         if($file){
-        $photo = new Photo;
-        $photo->photo_name = $request->photo_name;
-        $photo->album = $request->album;
-        $photo->save();
-
-        $photo_id = Photo::latest()->pluck('id'); 
-        //Yaaay!!
-        Storage::disk('local')->put('photos/'.$photo_id.'.jpg', File::get($file));
-        return 1;
+        $procurement = new Procurement();
+        $procurement->date_of_purchase =  $request->procurement_date;
+        $procurement->manufacturer_code = $request->manufacturer_code;
+        $procurement->SKU_code = $request->SKU_code;
+        $procurement->quantity = $request->quantity;
+        $procurement->price_overall = $request->price;
+        $procurement->supplier_card_code = $request->supplier_card_code;
+        $procurement->supplier_card_name = $request->supplier_card_name;
+        $procurement->card_url = 'photos/'.$request->SKU_code.'.jpg';
+        $procurement->save();
+        Storage::disk('local')->put('photos/'.$request->SKU_code.'.jpg', File::get($file));
+        return view('pages.redirectProcurement');
         }
-        return 0;
+        return 0;        
     }
 
     public function findManufacturer(Request $request){
@@ -64,6 +70,14 @@ class FormController extends Controller
         if($retailer)
             return $retailer;
         else 
+            return 0;
+    }
+
+    public function findProcurement(Request $request){
+        $procurement = Procurement::where('SKU_code',$request->SKU_code)->first();
+        if($procurement)
+            return $procurement;
+        else
             return 0;
     }
 
@@ -94,6 +108,23 @@ class FormController extends Controller
                         ]);
         return 1;
 
+    }
+
+    public function editProcurement(Request $request){
+        Procurement::where('SKU_code',$request->SKU_code)
+                   ->update([
+                            'date_of_purchase' => $request->procurement_date,
+                            'manufacturer_code' => $request->manufacturer_code,
+                            'SKU_code' => $request->SKU_code,
+                            'quantity' => $request->quantity,
+                            'price_overall' => $request->price,
+                            'supplier_card_code' => $request->supplier_card_code,
+                            'supplier_card_name' => $request->supplier_card_name,
+                            ]);
+        $file = $request->file('supplier_card_image');
+        if($file){
+        Storage::disk('local')->put('photos/'.$request->SKU_code.'.jpg', File::get($file));    
+        }
     }
 
 }

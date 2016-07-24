@@ -14,7 +14,7 @@ class CreateProcurementsTable extends Migration
     {
         Schema::create('procurements', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('date_of_purchase');
+            $table->string('date_of_purchase');
             $table->string('manufacturer_code');
             $table->string('SKU_code');
             $table->string('quantity');

@@ -16,7 +16,8 @@ Route::get('/', function () {
 });
 
 Route::auth();
-
+Route::group(['middleware' => 'auth'],function(){
+	
 Route::get('/dashboard','PagesController@home');
 Route::get('/register/manufacturer','PagesController@registerManufacturer');
 Route::post('/register/manufacturer','FormController@registerManufacturer');
@@ -32,5 +33,12 @@ Route::post('/edit/retailer','FormController@editRetailer');
 
 Route::get('/register/procurement','PagesController@registerProcurement');
 Route::post('/register/procurement','FormController@registerProcurement');
+Route::get('/edit/procurement','PagesController@editProcurement');
+Route::post('/edit/procurement','FormController@editProcurement');
+Route::post('/find/procurement','FormController@findProcurement');
+Route::get('/dashboard/register','PagesController@registerDashboard');
+Route::get('/dashboard/edit','PagesController@editDashboard');
+
+});
 
 Route::get('/home', 'HomeController@index');
