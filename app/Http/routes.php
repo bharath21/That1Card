@@ -39,6 +39,18 @@ Route::post('/find/procurement','FormController@findProcurement');
 Route::get('/dashboard/register','PagesController@registerDashboard');
 Route::get('/dashboard/edit','PagesController@editDashboard');
 
+Route::get('/register/sale','PagesController@registerSale');
+Route::post('/register/sale','FormController@registerSale');
+Route::get('/edit/sale','PagesController@editSale');
+Route::post('/edit/sale','FormController@editSale');
+Route::post('/find/sale','PagesController@findSale');
+
+Route::get('/register/card','PagesController@registerCard');
+Route::post('/register/card','FormController@reigsterCard');
+Route::get('/edit/card','PagesController@editCard');
+Route::post('/edit/card','FormController@editCard');
+Route::post('/find/card','FormController@findCard');
+
 });
 
 Route::get('/home', 'HomeController@index');

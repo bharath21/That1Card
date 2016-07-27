@@ -35,4 +35,16 @@ class PagesController extends Controller
     public function editProcurement(){
         return view('forms.procurement_edit');
     }
+    public function registerCard(){
+        return view('forms.card_register');
+    }
+    public function editCard(){
+        return view('forms.card_edit');
+    }
+    public function registerSale(){
+        return view('forms.sale_register');
+    }
+    public function editSale(){
+        return view('forms.sale_edit');
+    }
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Manufacturer;
 use App\Retailer;
 use App\Procurement;
+use App\Sale;
 use App\Http\Requests;
 
 class FormController extends Controller
@@ -55,6 +56,18 @@ class FormController extends Controller
         return view('pages.redirectProcurement');
         }
         return 0;        
+    }
+
+    public function registerSale(Request $request){
+        $sale = new Sale();
+        $sale->date_of_sale = $request->date_of_sale;
+        $sale->retailer_code = $request->retailer_code;
+        $sale->SKU_code = $request->SKU_code;
+        $sale->sale_price = $request->sale_price;
+        $sale->sale_quantity = $request->sale_quantity;
+        $sale->sale_invoice_number = $request->sale_invoice_number;
+        $sale->save();
+        return 1;
     }
 
     public function findManufacturer(Request $request){
@@ -125,6 +138,5 @@ class FormController extends Controller
         if($file){
         Storage::disk('local')->put('photos/'.$request->SKU_code.'.jpg', File::get($file));    
         }
-    }
-
+    }  
 }

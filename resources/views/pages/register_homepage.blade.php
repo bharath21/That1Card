@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Dashboard</title>
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -15,6 +15,12 @@
 #edit_row{
 	display: none;
 }
+#card_row{
+	display: none;
+}
+#card_button:hover{
+	cursor:pointer;
+}
 #register_button:hover{
 	cursor: pointer;
 }
@@ -22,60 +28,51 @@
 	cursor: pointer;
 }
 </style>
+<script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript" src="jquery.clickBubble.min.js"></script>
+	<script type="text/javascript">
+		
+	</script>
 </head>
 <body>
  <br/>
- <div class="row" style="margin-top:-4%;margin-bottom:-5%;">
- 		<span style="margin-left:40%;">
+ 
+ <div class="row" style="margin-top: -1%;margin-bottom:-2%;">
+ 		<div class="column column-50 column-offset-25" style="text-align:center;">
 			<img src="header_img.jpg">	
-		</span>
-		<span style="margin-left:30%;margin-top:5%;">
-				<b>{{Auth::user()->name}}</b>	
-		</span>
-		<span style="margin-left:1%;margin-top:5%;">
-			<a href="/logout">
-				<img src="logout.png" width="15" height="15" />
-			</a>	
-		</span>
+			<br/>
+		</div>
  </div>
  <hr/>
- <div class="row">
-		<div class="column" style="margin-left:15%;">
-		<div id="register_button">
-			<h4 style="margin-left:10%;">
-				<img src="add.png" width="50" height="50">	
-			</h4>
-	
-			<div class="row" id="register_description"	>
-				<h5>Add a new record.</h5> 
-			</div>
-		</div>
-		<div class="row" id="register_row" style="margin-left:-25%;">
-			 
-			 	<a href='{{action("PagesController@registerManufacturer")}}'>
+<div class="row">
+	<div class="column column-30" style="text-align:center;">
+		<span id="register_button">
+		<img src="add.png" height="50" width="50">
+		<h5>Add a record.</h5>
+		</span>
+		<span id="register_row">
+			 <a href='{{action("PagesController@registerManufacturer")}}'>
 			 		<button>Manufacturer</button>
-			 	</a>
-			 	<a href='{{action("PagesController@registerRetailer")}}'>
+			 </a>
+			 <a href='{{action("PagesController@registerRetailer")}}'>
 			 		<button>Retailer</button>
-			 	</a>
-			 	<a href='{{action("PagesController@registerProcurement")}}'>
+			 </a>
+			 <a href='{{action("PagesController@registerProcurement")}}'>
 			 		<button>Procurement</button>
-			 	</a>
-			 
-	 	</div>
-	 </div>
-	 <div class="column" style="margin-left:10%;">
-		<div id="edit_button">
-			<h4 style="margin-left:10%;">
-				<img src="edit.png" width="50" height="50">	
-			</h4>
-			<div class="row" id="edit_description">
-				<h5>Edit an existing record.</h5> 
-			</div>
-		</div>
-		<div class="row" id="edit_row" style="margin-left:-25%;">
-			 
-			 <a href='{{action("PagesController@editManufacturer")}}'>
+			 </a>
+			 <a href='{{action("PagesController@registerSale")}}'>
+			 		<button>Procurement</button>
+			 </a>
+		</span>
+	</div>
+	<br/><br/><br/>
+	<div class="column column-30" style="text-align:center;">
+		<span id="edit_button">
+		<img src="edit.png" height="50" width="50">
+		<h5>Edit a record.</h5>
+		</span>
+		<span id="edit_row">
+			<a href='{{action("PagesController@editManufacturer")}}'>
 		 		<button>Manufacturer</button>
 		 	</a>
 		 	<a href='{{action("PagesController@editRetailer")}}'>
@@ -84,15 +81,42 @@
 		 	<a href='{{action("PagesController@editProcurement")}}'>
 		 	<button>Procurement</button>
 		 	</a>
-			 
-	 	</div>
-	 </div>
- </div>
+		</span>
+	</div>
+</div>
+	<br/><br/><br/>
+<div class="row">
+	<div class="column column-30" style="text-align:center;">
+		<span id="card_button">
+		<img src="addcard.png" height="80" width="120" style="margin-bottom:-3%;margin-top:-2%;">
+		<h5>Add a card for sale.</h5>
+		</span>
+		<span id="card_row">
+			 <a href='{{action("PagesController@registerCard")}}'>
+			 		<button>Register a Card</button>
+			 </a>
+			 <a href='{{action("PagesController@editCard")}}'>
+			 		<button>Edit a card</button>
+			 </a>
+		</span>
+	</div>
+	<br/><br/><br/>
+	<div class="column column-30" style="text-align:center;">
+		<a href="/logout">
+		<span id="logout_button">
+		<img src="logout.png" height="50" width="50" style="margin-top:2%;" />
+		<br/>
+		</a>
+		<h5>Logout.</h5>
+		</span>
+	</div>
+</div>
 
 </body>
 <script>
 	var register_open = 1;
 	var edit_open = 1;
+	var card_open = 1;
 	$('#register_button').click(function(){
 		if(register_open == 1){
 		$('#register_description').css("display","none");
@@ -115,5 +139,17 @@
 		}
 		edit_open = edit_open*-1;
 	});
+	$('#card_button').click(function(){
+		if(card_open == 1){
+		$('#card_description').css("display","none");
+		$('#card_row').slideDown('slow');	
+		}
+		else{
+		$('#card_row').css("display","none");
+		$('#card_description').slideDown('slow');
+		}
+		card_open = card_open*-1;
+	});
+
 </script>
 </html>
