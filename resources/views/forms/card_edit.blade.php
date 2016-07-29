@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Register Procurement</title>
+	<title>Register A Card</title>
 	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -9,63 +9,52 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
 		<link rel="stylesheet" href="https://milligram.github.io/css/milligram.min.css">
 		<meta name="csrf-token" value="{{ csrf_token() }}">
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "#procurement_date" ).datepicker();
-  } );
-  </script>
+
 </head>
 <body>
 <br/>
-<br/>
-<div class="row"> 
+<div class="row">
 	<div class="column column-offset-25">
-		<form id="codeform">
-			<input type="text" id="TheCode">
-		</form>
-	</div>
-	<div class="column">
-		<button id="codebutton">Find this SKU code</button>
+		<h1>
+			Register a Card
+		</h1>
 	</div>
 </div>
-<hr/>
 <div class="row">
 	<div class="column column-50 column-offset-25">
-		<form id="procurement_form"  method="POST" enctype='multipart/form-data'>
+		<form id="card_form" method="POST">
 		  	{{csrf_field()}}
-		  	<label for="procurement_date">Procurement Date : </label>
-		    <input type="text" placeholder="dd-mm-yyyy" id="procurement_date" name="procurement_date">
+		    <label for="card_SKU_code">SKU Code : </label>
+		    <input type="text" placeholder="SKU code" id="card_SKU_code" name="card_SKU_code" readonly>
 		    <br/>
-		    <label for="manufacturer_code">Manufacturer Code : </label>
-		    <input type="text" placeholder="Manufacturer Code" id="manufacturer_code" name="manufacturer_code">
+		    <label for="card_wholesale_price">Wholesale Price : </label>
+		    <input type="text" placeholder="Price" id="card_wholesale_price" name="card_wholesale_price">
 		    <br/>
-			<label for="SKU_code">SKU Code : </label>
-		    <input type="text" placeholder="SKU Code" id="SKU_code" name="SKU_code">
+		    <label for="card_retail_price">Retail Price : </label>
+		    <input type="text" placeholder="Retail Price" id="card_retail_price" name="card_retail_price">
 		    <br/>
-   			<label for="quantity">quantity : </label>
-		    <input type="text" placeholder="Quantity" id="quantity" name="quantity">
-		    <br/>		    		    
-		    <label for="price">Price : </label>
-		    <input type="text" placeholder="Price in rupees" id="price" name="price">
+		    <label for="card_status">Status : </label>
+		    <input type="text" placeholder="Status" id="card_status" name="card_status">
 		    <br/>
-		    <label for="supplier_card_code">Supplier Card Code : </label>
-		    <input type="text" placeholder="Supplier Card Code" id="supplier_card_code" name="supplier_card_code">
+		    <label for="card_in_stock">Cards in Stock : </label>
+		    <input type="number" placeholder="Stock Qty" id="card_in_stock" name="card_in_stock">
 		    <br/>
-		    <label for="supplier_card_name">Supplier Card Name : </label>
-		    <input type="text" placeholder="Supplier Card Name" id="supplier_card_name" name="supplier_card_name">
-		    <br/>		    		    		    		    		    		    
-		    <label for="supplier_card_image">Supplier Card Name : </label>
-		    <input type="file" placeholder="Upload image" id="supplier_card_image" name="supplier_card_image">
+		    <label for="card_blocked">Cards Blocked : </label>
+		    <input type="number" placeholder="Blocked Qty" id="card_blocked" name="card_blocked" value="0">
+		    <br/>
+		    <label for="card_MOQ">Minimum Order Quantity : </label>
+		    <input type="number" placeholder="Minimum Qty" id="card_MOQ" name="card_MOQ" value="0">
+		    <br/>
+		    <label for="card_base_price">Card Base Price : </label>
+		    <input type="number" placeholder="Price" id="card_base_price" name="card_base_price">
 		    <br/>
 		    <input class="button-primary" type="submit" value="Regiser" id="register">
+		 
 		</form>
 	</div>
 </div>
 </body>
+
 <script>
 	$(document).ready(function(){
 		$.ajaxSetup({
@@ -73,22 +62,22 @@
     		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   			}
 		});
-
 		$('#codebutton').click(function(){
-			code = $('#TheCode').val();
+			//code = $('#TheCode').val();
 			alert(code);
 			$.ajax({
-		        url: "{{action('FormController@findCard')}}",
+		        url: "{{action('FormController@findManufacturer')}}",
 		        type:"POST",
-		        data: {"SKU_code" : code},
+		        data: {"manufacturer_code" : code},
 		        success:function(data){
-		          	$('#procurement_date').val(data['date_of_purchase']);
-		          	$('#manufacturer_code').val(data['manufacturer_code']);
-		          	$('#SKU_code').val(data['SKU_code']);
-		          	$('#quantity').val(data['quantity']);
-		          	$('#price').val(data['overall_price']);
-		          	$('#supplier_card_code').val(data['supplier_card_code']);
-		          	$('#supplier_card_name').val(data['supplier_card_name']);
+		          	$('#card_SKU_code').val(data['card_SKU_code']);
+		          	$('#card_wholesale_price').val(data['card_wholesale_price']);
+		          	$('#card_retail_price').val(data['card_retail_price']);
+		          	$('#card_status').val(data['card_status']);
+		          	$('#card_in_stock').val(data['card_in_stock']);
+		          	$('#card_blocked').val(data['card_blocked']);
+		          	$('#card_MOQ').val(data['card_MOQ']);
+		          	$('#card_base_price').val(data['card_base_price']);
 		        },
 		        error:function(){ 
 		            alert("error!");
@@ -97,24 +86,30 @@
 	
 		});
 
-		$('procurement_form').submit(function(e){
+		$('#edit').click(function(){
+			data = {
+				"manufacturer_code" : $('#manufacturer_code').val(),
+		        "manufacturer_name" : $('#manufacturer_name').val(),
+		        "manufacturer_TINno": $('#manufacturer_TINno').val(),
+		        "manufacturer_CSTno": $('#manufacturer_CSTno').val(),
+		        "manufacturer_email": $('#manufacturer_email').val(),
+		        "manufacturer_phone": $('#manufacturer_phone').val(),
+		        "manufacturer_address": $('#manufacturer_address').val()
+			}
 
-		//var postData = $(this).serializeArray();	
-		$.ajax({
-		        url: "{{action('FormController@registerProcurement')}}",
+			$.ajax({
+		        url: "{{action('FormController@editManufacturer')}}",
 		        type:"POST",
-		        data: postData,
+		        data: data,
 		        success:function(data){
-		          	alert('asdas');
+		          	alert('success');
 		        },
 		        error:function(){ 
 		            alert("error!");
 		        }
-	    	});
-		$('procurement_form').submit();
+	    	});			
 		});
-	  	
+		
 	});
 </script>
-
 </html>

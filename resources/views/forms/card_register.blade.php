@@ -16,34 +16,37 @@
 <div class="row">
 	<div class="column column-offset-25">
 		<h1>
-			Register a Manufacturer
+			Register a Card
 		</h1>
 	</div>
 </div>
 <div class="row">
 	<div class="column column-50 column-offset-25">
-		<form id="manufacturer_form" method="POST">
+		<form id="card_form" method="POST">
 		  	{{csrf_field()}}
-		    <label for="manufacturer_code">Manufacturer Code : </label>
-		    <input type="text" placeholder="Manufacturer Code" id="manufacturer_code" name="manufacturer_code">
+		    <label for="card_SKU_code">SKU Code : </label>
+		    <input type="text" placeholder="SKU code" id="card_SKU_code" name="card_SKU_code">
 		    <br/>
-		    <label for="manufacturer_name">Manufacturer Name : </label>
-		    <input type="text" placeholder="Name" id="manufacturer_name" name="manufacturer_name">
+		    <label for="card_wholesale_price">Wholesale Price : </label>
+		    <input type="text" placeholder="Price" id="card_wholesale_price" name="card_wholesale_price">
 		    <br/>
-		    <label for="manufacturer_TINno">Manufacturer TIN.no : </label>
-		    <input type="text" placeholder="TIN No." id="manufacturer_TINno" name="manufacturer_TINno">
+		    <label for="card_retail_price">Retail Price : </label>
+		    <input type="text" placeholder="Retail Price" id="card_retail_price" name="card_retail_price">
 		    <br/>
-		    <label for="manufacturer_CSTno">Manufacturer CST.no : </label>
-		    <input type="text" placeholder="CST No." id="manufacturer_CSTno" name="manufacturer_CSTno">
+		    <label for="card_status">Status : </label>
+		    <input type="text" placeholder="Status" id="card_status" name="card_status">
 		    <br/>
-		    <label for="manufacturer_email">Manufacturer Code : </label>
-		    <input type="email" placeholder="Email" id="manufacturer_email" name="manufacturer_email">
+		    <label for="card_in_stock">Cards in Stock : </label>
+		    <input type="number" placeholder="Stock Qty" id="card_in_stock" name="card_in_stock">
 		    <br/>
-		    <label for="manufacturer_phone">Manufacturer Phone No. : </label>
-		    <input type="number" placeholder="Phone" id="manufacturer_phone" name="manufacturer_phone">
+		    <label for="card_blocked">Cards Blocked : </label>
+		    <input type="number" placeholder="Blocked Qty" id="card_blocked" name="card_blocked" value="0">
 		    <br/>
-		    <label for="manufacturer_Address">Manufacturer Address : </label>
-		    <input type="text" placeholder="Address" id="manufacturer_address" name="manufacturer_address">
+		    <label for="card_MOQ">Minimum Order Quantity : </label>
+		    <input type="number" placeholder="Minimum Qty" id="card_MOQ" name="card_MOQ" value="0">
+		    <br/>
+		    <label for="card_base_price">Card Base Price : </label>
+		    <input type="number" placeholder="Price" id="card_base_price" name="card_base_price">
 		    <br/>
 		    <input class="button-primary" type="submit" value="Regiser" id="register">
 		 
@@ -60,11 +63,11 @@
   			}
 		});
 
-		$('manufacturer_form').submit(function(e){
+		$('card_form').submit(function(e){
 
 		//var postData = $(this).serializeArray();	
 		$.ajax({
-		        url: "{{action('FormController@registerManufacturer')}}",
+		        url: "{{action('FormController@registerCard')}}",
 		        type:"POST",
 		        data: postData,
 		        success:function(data){
@@ -74,7 +77,7 @@
 		            alert("error!");
 		        }
 	    	});
-		$('manufacturer_form').submit();
+		$('card_form').submit();
 		});
 	  	
 	});

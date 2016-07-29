@@ -9,11 +9,15 @@ use App\Manufacturer;
 use App\Retailer;
 use App\Procurement;
 use App\Sale;
+use App\Card;
 use App\Http\Requests;
 
 class FormController extends Controller
 { 
-	public function registerManufacturer(Request $request){
+	public function f(){
+        return 1;
+    }
+    public function registerManufacturer(Request $request){
     	$manufacturer = new Manufacturer();
     	$manufacturer->manufacturer_code = $request->manufacturer_code;
     	$manufacturer->manufacturer_name = $request->manufacturer_name;
@@ -67,6 +71,20 @@ class FormController extends Controller
         $sale->sale_quantity = $request->sale_quantity;
         $sale->sale_invoice_number = $request->sale_invoice_number;
         $sale->save();
+        return redirect('/register/sale');
+    }
+
+    public function registerCard(Request $request){
+        $card = new Card();
+        $card->card_SKU_code = $request->card_SKU_code;
+        $card->card_wholesale_price = $request->card_wholesale_price;
+        $card->card_retail_price = $request->card_retail_price;
+        $card->card_status = $request->card_status;
+        $card->card_in_stock = $request->card_in_stock;
+        $card->card_blocked = $request->card_blocked;
+        $card->card_MOQ = $request->card_MOQ;
+        $card->card_base_price = $request->card_base_price;
+        $card->save();
         return 1;
     }
 
@@ -87,9 +105,23 @@ class FormController extends Controller
     }
 
     public function findProcurement(Request $request){
-        $procurement = Procurement::where('SKU_code',$request->SKU_code)->first();
+        $procurement = Procurement::where('SKU_code',$request->SKU_code)
+                                  ->where('date_of_purchase',$request->date_of_purchase)
+                                  ->where('manufacturer_code',$request->manufacturer_code)
+                                  ->first();
         if($procurement)
             return $procurement;
+        else
+            return 0;
+    }
+
+    public function findSale(Request $request){
+         $sale = Sale::where('SKU_code',$request->SKU_code)
+                     ->where('date_of_sale',$request->date_of_sale)
+                     ->where('retailer_code',$request->retailer_code)
+                     ->first();
+        if($sale)
+            return $sale;
         else
             return 0;
     }

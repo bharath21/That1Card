@@ -21,7 +21,9 @@ class CreateCardsTable extends Migration
             $table->string('card_in_stock');
             $table->string('card_blocked');
             $table->string('card_MOQ'); //minimum order quantity
-            $table->timestamps('card_base_price');
+            $table->string('card_base_price');
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
         });
     }
 

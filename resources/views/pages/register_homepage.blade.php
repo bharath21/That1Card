@@ -61,7 +61,7 @@
 			 		<button>Procurement</button>
 			 </a>
 			 <a href='{{action("PagesController@registerSale")}}'>
-			 		<button>Procurement</button>
+			 		<button>Sale</button>
 			 </a>
 		</span>
 	</div>
@@ -81,6 +81,9 @@
 		 	<a href='{{action("PagesController@editProcurement")}}'>
 		 	<button>Procurement</button>
 		 	</a>
+		 	<a href='{{action("PagesController@editSale")}}'>
+		 	<button>Sale</button>
+		 	</a>
 		</span>
 	</div>
 </div>
@@ -88,30 +91,31 @@
 <div class="row">
 	<div class="column column-30" style="text-align:center;">
 		<span id="card_button">
-		<img src="addcard.png" height="80" width="120" style="margin-bottom:-3%;margin-top:-2%;">
-		<h5>Add a card for sale.</h5>
+			<img src="addcard.png" height="80" width="120" style="margin-bottom:-3%;margin-top:-2%;">
+			<h5>Cards</h5>
 		</span>
 		<span id="card_row">
 			 <a href='{{action("PagesController@registerCard")}}'>
-			 		<button>Register a Card</button>
+			 		<button>Add a card</button>
 			 </a>
 			 <a href='{{action("PagesController@editCard")}}'>
-			 		<button>Edit a card</button>
+			 		<button>Remove a card</button>
 			 </a>
 		</span>
 	</div>
+	
 	<br/><br/><br/>
+	
 	<div class="column column-30" style="text-align:center;">
-		<a href="/logout">
-		<span id="logout_button">
-		<img src="logout.png" height="50" width="50" style="margin-top:2%;" />
-		<br/>
-		</a>
-		<h5>Logout.</h5>
-		</span>
+			<span id="logout_button">
+				<a href="/logout">
+				<img src="logout.png" height="50" width="50" style="margin-top:2%;" />
+				<br/>
+				<h5>Logout.</h5>
+				</a>
+			</span>
 	</div>
 </div>
-
 </body>
 <script>
 	var register_open = 1;

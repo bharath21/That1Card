@@ -16,6 +16,7 @@
   <script>
   $( function() {
     $( "#procurement_date" ).datepicker();
+  	$("#TheCode_date_of_purchase").datepicker();
   } );
   </script>
 </head>
@@ -24,11 +25,14 @@
 <div class="row"> 
 	<div class="column column-offset-25">
 		<form id="codeform">
-			<input type="text" id="TheCode">
+			<input placeholder="Manufacturer Code" type="text" id="TheCode_manufacturer_code" />
+			<input placeholder="Date of Purchase" type="text" id="TheCode_date_of_purchase" />
+			<input placeholder="SKU code" type="text" id="TheCode_SKU_code" />
 		</form>
 	</div>
 	<div class="column">
-		<button id="codebutton">Find this SKU code</button>
+		<br/><br/>
+		<button id="codebutton">Find this Procurement</button>
 	</div>
 </div>
 <hr/>
@@ -43,7 +47,7 @@
 		    <input type="text" placeholder="Manufacturer Code" id="manufacturer_code" name="manufacturer_code">
 		    <br/>
 			<label for="SKU_code">SKU Code : </label>
-		    <input type="text" placeholder="SKU Code" id="SKU_code" name="SKU_code">
+		    <input type="text" placeholder="SKU Code" id="SKU_code" name="SKU_code" readonly>
 		    <br/>
    			<label for="quantity">quantity : </label>
 		    <input type="text" placeholder="Quantity" id="quantity" name="quantity">
@@ -75,12 +79,15 @@
 		});
 
 		$('#codebutton').click(function(){
-			code = $('#TheCode').val();
-			alert(code);
+			//code = $('#TheCode').val();
+			//alert(code);
 			$.ajax({
 		        url: "{{action('FormController@findProcurement')}}",
 		        type:"POST",
-		        data: {"SKU_code" : code},
+		        data: { "SKU_code" : $('#TheCode_SKU_code').val(),
+		        		"manufacturer_code": $('#TheCode_manufacturer_code').val(),
+		        		"date_of_purchase": $('#TheCode_date_of_purchase').val()
+		    			},
 		        success:function(data){
 		          	$('#procurement_date').val(data['date_of_purchase']);
 		          	$('#manufacturer_code').val(data['manufacturer_code']);
