@@ -18,6 +18,7 @@ class CreateCardsTable extends Migration
             $table->string('card_wholesale_price');
             $table->string('card_retail_price');
             $table->string('card_status');
+            $table->string('card_disable');
             $table->string('card_in_stock');
             $table->string('card_blocked');
             $table->string('card_MOQ'); //minimum order quantity

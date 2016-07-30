@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::auth();
 
+Route::group(['middleware' => 'auth'],function(){
+
 	
 Route::get('/dashboard','PagesController@home');
 Route::get('/register/manufacturer','PagesController@registerManufacturer');
@@ -52,5 +54,9 @@ Route::get('/edit/card','PagesController@editCard');
 Route::post('/edit/card','FormController@editCard');
 Route::post('/find/card','FormController@findCard');
 
+
+
+	
+});
 	
 Route::get('/home', 'HomeController@index');

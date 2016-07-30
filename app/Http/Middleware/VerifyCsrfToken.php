@@ -21,5 +21,7 @@ class VerifyCsrfToken extends BaseVerifier
         '/find/procurement',
         '/find/sale',
         '/edit/procurement',
+        '/find/card',
+        '/edit/card',
     ];
 }

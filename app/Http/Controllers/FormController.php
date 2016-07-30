@@ -80,6 +80,7 @@ class FormController extends Controller
         $card->card_wholesale_price = $request->card_wholesale_price;
         $card->card_retail_price = $request->card_retail_price;
         $card->card_status = $request->card_status;
+        $card->card_disable = 1;
         $card->card_in_stock = $request->card_in_stock;
         $card->card_blocked = $request->card_blocked;
         $card->card_MOQ = $request->card_MOQ;
@@ -126,6 +127,12 @@ class FormController extends Controller
             return 0;
     }
 
+    public function findCard(){
+        $cards = Card::get()->all();
+        $data['cards'] = $cards;
+        return json_encode($data);
+    }
+
     public function editManufacturer(Request $request){
         Manufacturer::where('manufacturer_code',$request->manufacturer_code)
                     ->update([
@@ -170,5 +177,13 @@ class FormController extends Controller
         if($file){
         Storage::disk('local')->put('photos/'.$request->SKU_code.'.jpg', File::get($file));    
         }
-    }  
+    }
+
+    public function editCard(Request $request){
+        $card = Card::where('card_SKU_code',$request->card_SKU_code)->first();
+        $disable_token = $card->card_disable*-1;
+        Card::where('card_SKU_code',$request->card_SKU_code)
+            ->update(['card_disable' => $disable_token]);
+        return 1;
+    }
 }

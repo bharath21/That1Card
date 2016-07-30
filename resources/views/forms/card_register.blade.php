@@ -34,7 +34,7 @@
 		    <input type="text" placeholder="Retail Price" id="card_retail_price" name="card_retail_price">
 		    <br/>
 		    <label for="card_status">Status : </label>
-		    <input type="text" placeholder="Status" id="card_status" name="card_status">
+		    <input type="text" placeholder="A(available) / D(Discontinued)" id="card_status" name="card_status">
 		    <br/>
 		    <label for="card_in_stock">Cards in Stock : </label>
 		    <input type="number" placeholder="Stock Qty" id="card_in_stock" name="card_in_stock">
