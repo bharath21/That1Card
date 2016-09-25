@@ -2,7 +2,6 @@
 Admin site and REST API for That1Card android application.
 
 #Requirements
-
 1. PHP 5.2 or greater.
 2. MySQL 
 3. composer
@@ -17,4 +16,5 @@ Admin site and REST API for That1Card android application.
 6. Run `php artisan serve --port 8000`
 7. Fire up localhost:8000 to preview the site.
 
-This site was built with Milligram CSS framework - 
+
+This site was built with [Milligram CSS](https://milligram.github.io/) framework 
